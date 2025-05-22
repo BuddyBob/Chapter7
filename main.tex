@@ -1,0 +1,871 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage[most]{tcolorbox}  
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\usepackage{enumitem}
+\setlist{itemsep=5pt, topsep=5pt}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries\color{blue!70!black}}{}{0em}{}
+\titleformat{\subsection}[runin]{\bfseries\color{blue!80!black}}{}{0em}{}[.]
+\titleformat{\subsubsection}[runin]{\itshape\color{black}}{}{0em}{}[.]
+\usepackage{xcolor}
+\title{\textbf{Calculus BC Scrapbook: Chapter 7 – Differential Equations}}
+\author{Thavas Antonio}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle     
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+In this unit of my scrapbook we will explore mathematical models of how systems change over time. Key topics I will cover -
+modeling situations with differential equations, verifying solutions, using slope fields, applying Euler's method, solving separable equations, and modeling exponential and logistic growth. 
+
+\medskip
+\noindent
+\textbf{What this scrapbook does.}  Each Big Idea (Sections 7.1–7.9) is dedicated two pages.
+
+\begin{itemize}
+  \item \textbf{Concept} – 1. definition 2. concise explanation 3. essential vocabulary 4. annotated diagrams 5. examples
+  \item \textbf{Answer} – solutions if you'd like to check your answers
+\end{itemize}
+
+\vspace{10pt}
+
+\begin{tcolorbox}[title=Chapter 7 Roadmap,colback=gray!8,colframe=cyan]
+\begin{enumerate}
+  \item 7.1 Modeling Situations with DEs  
+  \item 7.2 Verifying Solutions for DEs  
+  \item 7.3 Sketching Slope Fields  
+  \item 7.4 Reasoning of Slope Fields  
+  \item 7.5 Approximating Solutions with Euler’s Method 
+  \item 7.6 General Solutions via Separation of Variables  
+  \item 7.7 Particular Solutions with Initial Conditions  
+  \item 7.8 Exponential Models with DEs  
+  \item 7.9 Logistic Models with DEs
+\end{enumerate}
+\end{tcolorbox}
+\newpage
+
+%==================== 7.1 ====================
+\section{7.1 Modeling Situations with Differential Equations}
+\subsection*{Big Idea Definition}
+\begin{itemize}
+  \item \textbf{Differential equations} are essentially equations are the relationship between a function and its rate of change.
+  \item \textbf{Order:} highest derivative present 
+\end{itemize}
+
+\subsection*{Explanation}
+I think of a differential equation as \textbf{how fast something is changing at a given \textit{t}}.
+
+\begin{itemize}
+  \item \textbf{Variable} $y(t)$ = what we’re tracking (water volume, temperature, pop, etc.).
+  \item \textbf{Derivative} $\dfrac{dy}{dt}$ = rate at which something changes (liters per minute, C per second, pop increase per month).
+  \item A derivitive is the linking of these two: for example, $\dfrac{dy}{dt}=5$ means water is being added at a rate of 5 {unit}.
+        $\dfrac{dy}{dt}=0.1y$ means population grows 10 \% every time unit.
+\end{itemize}
+
+Writing a model can be done three steps:
+
+\begin{enumerate}
+  \item \textbf{Figure out what is changing.} 
+  \item \textbf{Describe the rule.} Is change constant or proportional
+  \item \textbf{Translate the rule into symbols.} Your math 
+\end{enumerate}
+
+\medskip
+
+\subsection*{Key Vocabulary}
+\begin{enumerate}
+    \item rate of change, derivative, independent variable, dependent variable, order, initial value problem (IVP), parameter, solution curve
+\end{enumerate}
+
+\subsection*{Worked Examples}
+\begin{enumerate}
+  \item \textbf{Steady Faucet (Constant Rate)}  
+        A bucket is empty at $t=0$ and water flows in at \(5\text{ L/min}\).  
+        \[
+          \frac{dV}{dt}=5
+        \]  
+        In a sentence “the volume \(V\) increases 5 liters every minute.”
+
+  \item \textbf{Rabit Pop Growth (Proportional Rate)}  
+        If a rabbit population grows at 20 \% per month, where the constant 0.20 is the {growth rate}.
+        \[
+          \frac{dP}{dt}=0.20\,P
+        \]  
+        
+\end{enumerate}
+
+%==================== 7.2 ====================
+\newpage
+\section{7.2 Verifying Solutions for Differential Equations}
+
+\subsection*{Big-Idea Definition}
+To verify a solution means to prove that the function we came up with actually fits the DE.
+We can do this by \textbf{finding the required derivative}, \textbf{sub into} the DE,
+\textbf{simplify}, and make sure what is returned is \textbf{true}
+
+\subsection*{Explanation}
+Imagine Mr. Moy hands you $\dfrac{dy}{dx}=6x$ and tells that
+$y=3x^{2}+7$ is the solution.  
+
+
+\begin{enumerate}
+  \item Differentiate Mr. Moy's $y$: \(\dfrac{dy}{dx}=6x\).
+  \item Compare with the DE’s right side (also $6x$).  
+  \item They match so verification works
+\end{enumerate}
+
+\subsection*{Key Vocabulary}
+ explicit solution, implicit solution,
+initial value
+
+\subsection*{Worked Examples with Verifications}
+
+\begin{enumerate}
+  \item \textbf{Linear Growth}  
+  Verify that \(y = 4x - 1\) solves \(\dfrac{dy}{dx} = 4\).
+
+  \textbf{Step 1:} Find \(\dfrac{dy}{dx}\):
+  \[
+  \frac{dy}{dx} = 4
+  \]
+
+  \textbf{Step 2:} Compare with the right side of the DE:
+  \[
+  \frac{dy}{dx} = 4
+  \]
+
+  \textbf{Conclusion:} Since both sides match, \(y = 4x - 1\) is a valid solution.
+
+  \bigskip
+
+  \item \textbf{Exponential Growth}  
+  Verify that \(y = Ce^{2x}\) solves \(\dfrac{dy}{dx} = 2y\).
+
+  \textbf{Step 1:} Differentiate:
+  \[
+  \frac{dy}{dx} = 2Ce^{2x}
+  \]
+
+  \textbf{Step 2:} Compute the right-hand side:
+  \[
+  2y = 2(Ce^{2x}) = 2Ce^{2x}
+  \]
+
+  \textbf{Step 3:} Compare:
+  \[
+  \frac{dy}{dx} = 2y 
+  \]
+
+  \textbf{Conclusion:} \(y = Ce^{2x}\) is a valid solution and was proved simply through differentiating and plugging
+
+  \bigskip
+
+  \item \textbf{Implicit}  
+  Prove that \(x^2 + y^2 = 25\) satisfies: \(x\dfrac{dy}{dx} + y = 0\)
+
+  \textbf{Step 1:} Some solutions require implicit diff:
+  \[
+  \frac{d}{dx}(x^2 + y^2) = \frac{d}{dx}(25) \Rightarrow 2x + 2y\frac{dy}{dx} = 0
+  \]
+
+  \textbf{Step 2:} Simplify:
+  \[
+  x + y\frac{dy}{dx} = 0 \Rightarrow x\frac{dy}{dx} + y = 0
+  \]
+
+  \textbf{Conclusion:} As proven the equation given matches the DE equation
+\end{enumerate}
+
+
+
+
+\newpage
+\section{7.3 Sketching Slope Fields}
+
+\subsection*{Big-Idea Definition}
+Simply put slope fields are very helpful for visualizing solutions to differential equations.
+Additionally they are very helpful in visualizing anti derivitives
+\[
+\frac{dy}{dx} = f(x, y)
+\]
+Instead of writing equations we can model them using line segments at given points. Entering f(x,y) will give us a slope value creating cool visuals. 
+
+\subsection*{Explanation}
+Previous big ideas explain how to write equations, prove and solve them.
+Slope fields are a tool to visualize the behavior of our solutions. 
+\textbf{DESMOS} is a great tool to do this quickly. 
+
+To sketch one:
+\begin{enumerate}
+  \item Pick a grid of \((x, y)\) points
+  \item At each point, plug values into your differential equation to get the slope.
+  \item Draw a small segment with that slope at each point (estimate this)
+  \item Once you have a all the point slopes drawn, you may notice a flow
+\end{enumerate}
+
+\textbf{Why this matters:} This will help us understand the behaviour
+\centering
+\includegraphics[width=0.5\linewidth]{slopeField1.png}
+\label{fig:enter-label}
+
+\subsection*{Key Vocabulary}
+slope field, direction field, tangent, solution curve
+
+\subsection*{Worked Examples}
+
+\begin{enumerate}
+  \item \textbf{Sketch the slope field for \( \dfrac{dy}{dx} = x \).}
+
+    \textbf{Steps:}
+    \begin{itemize}
+      \item Simply plug in x range [-1,1] to get slope values
+      \item At \(x = 0\), the slope is 0 \(\Rightarrow\) flat line
+      \item At \(x = 1\), the slope is 1 \(\Rightarrow\) 45° line.
+      \item At \(x = -1\), the slope is -1 \(\Rightarrow\) lines slope downward.
+    \end{itemize}
+
+
+  \begin{center}
+      \vspace{0.3cm}
+      \includegraphics[width=0.5\textwidth]{slopeField2.png}
+      \vspace{0.3cm}
+  \end{center}
+
+  \textbf{Observation:} Appears to be a bell shaped curve
+
+  \bigskip
+
+\item \textbf{Lets try something harder: Solve and verify that \( y = \frac{1}{x + C} \) satisfies the differential equation \( \dfrac{dy}{dx} = -y^2 \).}
+
+\textbf{Steps:}
+\begin{itemize}
+  \item Lets start with the given solution: \( y = \frac{1}{x + C} \)
+  \item Differentiate using the chain rule:
+  \[
+  \frac{dy}{dx} = \frac{d}{dx}\left(\frac{1}{x + C}\right) = (x+C)^1= -\frac{1}{(x + C)^2}
+  \]
+  \item Now square \( y \):
+  \[
+  y^2 = \left(\frac{1}{x + C}\right)^2 = \frac{1}{(x + C)^2}
+  \]
+  \item Compare the both. Looks like there's a match.
+\end{itemize}
+
+\vspace{0.3cm}
+\newpage
+\textbf{How this fits with the slope field:}
+\begin{itemize}
+  \item The green lines are our y function 
+  \item \(\frac{dy}{dx}\) is modeled by our slope field
+  \item Notice how the solution lines up perfectly with the little slope marks on the graph
+\end{itemize}
+
+\begin{center}
+\vspace{0.3cm}
+\includegraphics[width=0.5\textwidth]{slopeField3.png}
+\vspace{0.3cm}
+\end{center}
+
+\end{enumerate}
+
+\textbf{Conclusion:}  
+The function \( y = \frac{1}{x + C} \) satisfies the differential equation \( \dfrac{dy}{dx} = -y^2 \). 
+
+
+\newpage
+\section{7.4 Reasoning Using Slope Fields}
+
+\subsection{Big-Idea Definition}
+Once you've drawn a slope field we need to learn how to read it. \textbf{Reasoning with slope fields} means simply looking at the direction of our segments and finding a best fit curve.
+
+\subsection*{Explanation}
+Each line segment in the slope field tells us the slope of the solution curve at that exact point. So, if we were to "drop a pencil" on the graph at any point and try to follow the little slopes, we'd trace out a solution.
+
+
+\textbf{\(\Rightarrow\)} Flat segments usually mean equilibrium solutions.
+
+\subsubsection*{Things to look for:}
+\begin{itemize}
+  \item Where are the slopes zero? \(\Rightarrow\) That means the curve is flat there.
+  \item Where do slopes change from positive to negative or vice versa?
+  \item If you’re given an initial value (like \(y(1) = 2\)), find that point and follow the slope from there.
+\end{itemize}
+
+\vspace{10pt}
+\begin{figure}[h]
+\caption{Sample slope field for \(\dfrac{dy}{dx} = y(1 - y)\)}
+\includegraphics[width=0.6\textwidth]{slopeField4.png}
+\end{figure}
+
+\subsection*{Key Vocabulary}
+equilibrium solution, stability, initial value, solution curve, direction field
+
+\subsection*{Worked Examplees}
+
+\begin{enumerate}
+  \item \textbf{Example 1: Equilibrium Thinking}  
+Let’s look at this differential equation:  
+\[
+\frac{dy}{dx} = y(1 - y)
+\]
+
+\textbf{\(\Rightarrow\) Step 1: When is the slope zero?}  
+This means: when is \(\frac{dy}{dx} = 0\)?  
+Set the right side equal to zero:
+\[
+y(1 - y) = 0
+\Rightarrow y = 0 \text{ or } y = 1
+\]
+
+These are called \textbf{equilibrium solutions | critical points} as the slope is zero here.
+
+\textbf{\(\Rightarrow\) Step 2: What happens above, below, and between?}
+\begin{itemize}
+  \item If you start between \(y = 0\) and \(y = 1\), the slope is positive \(\Rightarrow\) solutions go up.
+  \item If you start above \(y = 1\), the slope is negative \(\Rightarrow\) solutions go down.
+  \item If you start below \(y = 0\), the slope is positive again \(\Rightarrow\) solutions go up.
+\end{itemize}
+
+\textbf{Conclusion:}
+\begin{itemize}
+  \item \(y = 1\) curves move toward it.
+  \item \(y = 0\) curves move away from it.
+\end{itemize}
+
+  \vspace{10pt}
+  \begin{figure}[h]
+  \centering
+  \caption{Solutions rising or falling depending on initial value}
+  \includegraphics[width=0.5\textwidth]{slopeField4.png}
+  \end{figure}
+  \item \textbf{Example 2: Which curve fits?}
+
+  Suppose you're shown a slope field and three candidate solution curves—A, B, and C.
+
+  \textbf{How to check:}
+  \begin{itemize}
+    \item \textbf{Find key points:} Choose some \((x, y)\) values and check the slope the curve has there.
+    \item \textbf{Compare with the slope field:} Does the drawn slope match the little segment's slope?
+    \item \textbf{Reject curves that cross or ignore slope directions.}
+  \end{itemize}
+
+  \begin{figure}[h]
+  \centering
+  \caption{Only Curve B follows the slope directions correctly. Curves A and C do not match the field}
+  \includegraphics[width=0.7\textwidth]{output.png}
+  \end{figure}
+
+\item \textbf{Example 3: Predicting Long-Term Behavior}
+
+Consider the differential equation:
+\[
+\frac{dy}{dx} = x - y
+\]
+
+\textbf{\(\Rightarrow\) Step 1: Where is the slope zero?}  
+Set \(x - y = 0 \Rightarrow y = x\). This is a diagonal line across the plane. At every point on this line, the slope is flat (\(dy/dx = 0\)).
+
+\textbf{\(\Rightarrow\) Step 2: Analyze what happens around it.}
+\begin{itemize}
+  \item If \(y < x\), then \(x - y > 0 \Rightarrow\) slope is positive \(\Rightarrow\) curve rises.
+  \item If \(y > x\), then \(x - y < 0 \Rightarrow\) slope is negative \(\Rightarrow\) curve drops.
+\end{itemize}
+
+
+\textbf{Conclusion:}  
+All solutions tend to follow the line \(y = x\) over time. Even though the actual solution may start above or below, it moves toward that line:
+\[
+\lim_{x \to \infty} y(x) = x
+\]
+\end{enumerate}
+
+%==================== 7.5 ====================
+\newpage
+\section{7.5 Approximating Solutions Using Euler’s Method}
+
+\subsection*{Big-Idea Definition}
+\begin{itemize}
+  \item \textbf{Euler’s Method} – Essentially a "connect the dots" or a way to estimate the solution of a DE by taking small steps along a curve's tangent lines
+  \item \textbf{Simple Rule}  
+        \[
+          y_{\text{next}} 
+          \;=\; y_{\text{current}}
+          \;+\; f(x_{\text{current}},y_{\text{current}})\,\Delta x
+        \]
+        where \(f(x,y)=\dfrac{dy}{dx}\).
+\end{itemize}
+
+\subsection*{Explanation}
+\begin{enumerate}
+  \item Pick a \textbf{step size}. It will look like \(\Delta x\). The smaller value you choose the more accurate but the more tedious
+  \item Start at the given \textbf{initial point} \((x_0,y_0)\).
+  \item Get the slope \(f(x_0,y_0)\) and jump:\;
+        \(y_1 = y_0 + f(x_0,y_0)\,\Delta x\).
+  \item Move on by step size:\;
+        \(x_1 = x_0 + \Delta x\).\;
+        Repeat until you reach the \(x\)-value you care about.
+\end{enumerate}
+
+\medskip
+\noindent
+\textbf{Easy Explanation.} Think of it as driving at a constant slope for \(\Delta x\) seconds, then finding the slope at the new spot, and so on. Smaller steps = smoother ride.
+
+\subsection*{Key Vocabulary}
+step size, local error, global error, recursion, tangent line, approximation table
+
+\subsection*{Worked Examples}
+
+\begin{enumerate}
+\item \textbf{Warm-Up}  
+Estimate \(y(1)\) for 
+\(\displaystyle \frac{dy}{dx}=x+y, \quad y(0)=1\)  
+using \(\Delta x = 0.50\).
+
+What this problem is asking from us is to apply Euler’s Method with a step size of \(\Delta x = 0.50\), starting at the initial point \((0,1)\), to approximate the value of \(y\) when \(x = 1\).
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$n$ & $x_n$ & $y_n$ & $f(x_n,y_n)=x_n+y_n$ \\ \hline
+0 & 0.00 & 1.000 & 1.000 \\ \hline
+1 & 0.50 & 1.500 & 2.000 \\ \hline
+2 & 1.00 & 2.500 & – \\ \hline
+\end{tabular}
+\end{center}
+
+\[
+\boxed{\,y(1)\;\approx\;2.50\,}
+\]
+
+
+\item \textbf{Spicier Example}  
+Use Euler’s method with \(\Delta x = 0.25\) to approximate \(y(0.5)\) for  
+\(\displaystyle \frac{dy}{dx}=y-x^2, \quad y(0)=0.\)
+
+What this problem is asking from us is to apply Euler’s Method with a step size of \(\Delta x = 0.25\), starting at the initial point \((0,0)\), to take two quarter-step jumps and approximate the value of \(y\) when \(x = 0.5\).
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$n$ & $x_n$ & $y_n$ & $f(x_n,y_n)=y_n-x_n^2$ \\ \hline
+0 & 0.00 & 0.000 & 0.000 \\ \hline
+1 & 0.25 & 0.000 & $-0.0625$ \\ \hline
+2 & 0.50 & $-0.0156$ & – \\ \hline
+\end{tabular}
+\end{center}
+
+\[
+\boxed{\,y(0.5)\;\approx\;-0.016\;(\text{rounded})\,}
+\]
+
+\bigskip
+\textit{Takeaway:} Smaller \(\Delta x\) would nudge those answers closer to the actual solution curve but you'd probably get really tired. I believe Mr. Moy doesn't mind 3-4 steps. 
+
+
+\end{enumerate}
+
+%==================== 7.6 ====================
+\newpage
+\section{7.6 General Solutions via Separation of Variables}
+
+\subsection*{Big-Idea Definition}
+\begin{itemize}
+  \item A \textbf{separable differential equation} can be rearranged so that every \(y\)-term (and \(dy\)) lives on one side and every \(x\) term (and \(dx\)) lives on the other:
+  \[
+    \frac{dy}{dx}=G(x)\,H(y)
+    \;\;\Longrightarrow\;\;
+    \frac{1}{H(y)}\,dy = G(x)\,dx.
+  \]
+  \item Integrate both sides \(\displaystyle\int\) and slap on a “\(+C\)”
+\end{itemize}
+
+\subsection*{Explanation}
+\begin{enumerate}
+  \item \textbf{Spot the structure.}  Make sure the DE can be written as \(H(y)\,dy = G(x)\,dx\). 
+  \item \textbf{Separate.}  Physically move the \(y\) stuff (including \(dy\)) to one side and the \(x\) stuff (with \(dx\)) to the other.
+  \item \textbf{ \(\displaystyle\int\) Integrate both sides.}
+  \item \textbf{Solve for \(y\) (if possible).} You could end up with implicit diff which makes your life harder.
+\end{enumerate}
+
+\subsection*{\centering{Key Vocabulary}}
+separable DE, constant of integration, implicit solution, explicit solution, antiderivative
+
+\subsection*{Worked Examples}
+
+%------------------------------------------------
+\begin{enumerate}
+\item \textbf{Easy example}  
+Find the general solution of
+\[
+\frac{dy}{dx}=3x^{2}\,y.
+\]
+
+\textit{Separate:}\;
+\(\displaystyle\frac{1}{y}\,dy = 3x^{2}\,dx.\)
+
+\textit{Integrate:}\;
+\(\displaystyle \int\frac{1}{y}\,dy = \int 3x^{2}\,dx
+\;\Rightarrow\;
+\ln|y| = x^{3}+C.\)
+
+\begin{align*}
+\ln|y| &= x^{3}+C \\[6pt]
+\text{Exponentiate both sides:}\qquad 
+|y| &= e^{\,x^{3}+C}
+      \;=\; e^{C}\,e^{\,x^{3}} \\[6pt]
+\text{Lets make K absorb our }e^{C}:\qquad
+|y| &= K\,e^{\,x^{3}} \\[6pt]
+\text{Drop the absolute value}\pm: \;
+y &= \pm K\,e^{\,x^{3}} \\[6pt]
+\text{Say our }\pm K\text{can be an anything goes constant }C: \qquad
+\boxed{y = C\,e^{\,x^{3}}}.
+\end{align*}
+
+%------------------------------------------------
+\bigskip
+\item \textbf{A Tad Trickier}  
+Solve
+\[
+\frac{dy}{dx}=\frac{x^{2}}{1+y^{2}}.
+\]
+
+\textit{Separate:}\;
+\((1+y^{2})\,dy = x^{2}\,dx.\)
+
+\textit{Integration help along the way}
+\[
+\int (1 + y^{2})\,dy \;=\; \int 1\,dy \;+\; \int y^{2}\,dy
+       \;=\; y \;+\; \frac{y^{3}}{3} \;+\; C_{1}.
+\]
+
+\[
+\int x^{2}\,dx \;=\; \frac{x^{3}}{3} \;+\; C_{2}.
+\]
+
+\textit{Combine the two:}
+\[
+y + \frac{y^{3}}{3} \;=\; \frac{x^{3}}{3} \;+\; (C_{2} - C_{1})
+\;\;\Longrightarrow\;\;
+y + \frac{y^{3}}{3} \;=\; \frac{x^{3}}{3} \;+\; C,
+\]
+Once again C is our catch all constant
+
+\textit{Implicit answer:}\;
+\[
+\boxed{\,y + \dfrac{y^{3}}{3} = \dfrac{x^{3}}{3} + C\,}
+\]
+
+
+\end{enumerate}
+
+\noindent
+
+%==================== 7.7 ====================
+\newpage
+\section{7.7 Particular Solutions with Initial Conditions}
+
+\subsection*{Big-Idea Definition}
+\begin{itemize}
+    In this topic, we’ll learn about the difference between a general solution and a particular solution using separation of variables. It may be helpful to go back and review 7.6.
+  \item A \textbf{particular solution} is the curve from a family that actually passes through a given point \((x_0,y_0)\).
+  
+  \item You find it by \textbf{plugging the initial condition} into the general solution to pin down the constant \(C\).
+\end{itemize}
+
+\subsection*{Explanation}
+\begin{enumerate}
+  \item \textbf{Get the general solution} could use 7.6 for this
+  \item \textbf{Insert} \(x_0\) and \(y_0\) into that general solution.
+  \item \textbf{Solve for \(C\)}.  
+        with painful algebra you’ve got a unique \(C\).
+  \item \textbf{Rewrite} the formula with that \(C\) and you have a particular solution.
+\end{enumerate}
+
+\subsection*{Key Vocabulary}
+initial condition, IVP (initial value problem), particular solution, unique solution
+
+\subsection*{Worked Examples}
+
+%------------------------------------------------
+\begin{enumerate}
+\item \textbf{Easy}  
+Solve the IVP
+\[
+\frac{dy}{dx}=3x^{2}y, \qquad y(0)=4.
+\]
+
+\textit{Step 1 – General solution (see Section 7.6):}\;
+\(y = C e^{x^{3}}\).
+
+\textit{Step 2 – Apply \(y(0)=4\):}
+\[
+4 = C e^{0}\quad\Longrightarrow\quad C = 4.
+\]
+
+\textit{Particular solution:}\;
+\[
+\boxed{y = 4\,e^{x^{3}}}.
+\]
+
+%------------------------------------------------
+\bigskip
+\item \textbf{Harder}  
+Solve the IVP
+\[
+\frac{dy}{dx}=y(1-y), \qquad y(0)=\tfrac12.
+\]
+
+\textit{Step 1 – Separate and integrate:}
+\[
+\frac{dy}{y(1-y)} = dx
+\quad\Longrightarrow\quad
+\ln\!\bigl|\tfrac{y}{1-y}\bigr| = x + C.
+\]
+
+\textit{Step 2 – Exponentiate and tidy:}
+\[
+\frac{y}{1-y} = Ce^{\,x}.
+\]
+
+\textit{Step 3 – Apply \(y(0)=\tfrac12\):}
+\[
+\frac{\tfrac12}{1-\tfrac12} = C e^{0}
+\;\;\Longrightarrow\;\;
+1 = C.
+\]
+
+\textit{Step 4 – Solve for \(y\):}
+\[
+\frac{y}{1-y}=e^{\,x}
+\;\;\Longrightarrow\;\;
+y = \frac{e^{\,x}}{1+e^{\,x}}.
+\]
+
+\textit{Particular solution:}\;
+\[
+\boxed{y(x)=\dfrac{e^{\,x}}{1+e^{\,x}}}.
+\]
+
+\end{enumerate}
+
+\noindent
+\textbf{So.}  
+The initial condition acts like a “GPS pin” on the slope field—only one curve goes through it, and Section 7.7 shows how not only to spot it but to name it through algebra
+
+
+%==================== 7.8 ====================
+\newpage
+\section{7.8 Exponential Models with Differential Equations}
+
+\subsection*{Big-Idea Definition}
+\begin{itemize}
+  \item When will I use math? Well this can be applied with stuff like —bacteria, money in the bank, radioactive atoms— changes so that \emph{the bigger it is, the faster it grows (or decays)}.  
+        You can capture that with 
+        \[
+          \frac{dy}{dt}=k\,y,
+        \]
+        where  
+        \(\;y(t)\) = “how much we have at time \(t\),”  \\
+        \(k>0\) = growth constant (upward trend),  \\
+        \(k<0\) = decay constant (downward trend).
+  \item Solving that one-liner gives an \textbf{exponential curve}  
+        \[
+          y(t)=C\,e^{kt},
+        \]
+        where \(C=y(0)\) is simply the starting amount.  
+        In plain words: keep multiplying by the same factor every equal chunk of time.
+\end{itemize}
+
+\subsection*{Explanation (Why the math makes sense)}
+\begin{enumerate}
+  \item \textbf{Proportionality picture.}  Every extra gram of bacteria, or dollar in your bank earns its own “mini-growth,” so the overall change stacks up proportionally.
+  \item \textbf{Deriving the formula quickly.}  Separate variables:
+        \(\displaystyle \frac{1}{y}\,dy = k\,dt\).  
+        Integrate → \(\ln|y| = k t + C\).  
+        Exponentiate → \(y = C e^{k t}\).
+\end{enumerate}
+
+\subsection*{Key Vocabulary}
+exponential growth, exponential decay, growth constant
+
+\subsection*{Worked Examples (kind of hard :(  )}
+%------------------------------------------------
+\begin{enumerate}
+\item \textbf{Bacteria Growth – Classic Doubling}
+A bacteria culture starts with \(500\) cells and doubles every 3 hours.
+
+\begin{enumerate}[label=\alph*)]
+  \item Write an equation for the population after \(t\) hours.
+  \item How many bacteria are there after 10 hours?
+\end{enumerate}
+
+\textit{Step-by-step:}
+\begin{itemize}
+  \item Since it’s doubling, the growth is exponential.
+  \item We use the model: \(\dfrac{dy}{dt} = k y\).
+  \item We know it doubles in 3 hours, so use that to find \(k\):  
+  \[
+  2 = e^{3k} \Rightarrow k = \frac{\ln 2}{3} \approx 0.231
+  \]
+  \item Now plug into the model:  
+  \[
+  \boxed{y(t) = 500\,e^{0.231t}}
+  \]
+  \item After 10 hours:
+  \[
+  y(10) = 500\,e^{2.31} \approx 5040 \text{ cells}
+  \]
+\end{itemize}
+
+\bigskip
+%------------------------------------------------
+\item \textbf{Carbon-14 – Decay Example}
+A fossil had 10 mg of Carbon-14. It has a half-life of 5730 years.
+
+\begin{enumerate}[label=\alph*)]
+  \item Write a model for how much C-14 remains after \(t\) years.
+  \item How much is left after 10,000 years?
+\end{enumerate}
+
+\textit{Step-by-step:}
+\begin{itemize}
+  \item This is decay, so we still use \(\dfrac{dy}{dt} = k y\), but \(k < 0\).
+  \item Half-life formula gives:  
+  \[
+  k = \frac{-\ln 2}{5730} \approx -0.000121
+  \]
+  \item Plug into the formula:  
+  \[
+  \boxed{y(t) = 10\,e^{-0.000121t}}
+  \]
+  \item After 10,000 years:
+  \[
+  y(10000) \approx 10\,e^{-1.21} \approx 2.98 \text{ mg}
+  \]
+\end{itemize}
+
+\bigskip
+%------------------------------------------------
+\item \textbf{Continuous Interest – Bank Account}
+You put \$1200 into an account that grows at 4.5% interest, compounded continuously.
+
+\begin{enumerate}[label=\alph*)]
+  \item Write a model for the balance.
+  \item How much is in the account after 8 years?
+  \item When will the account reach \$3000?
+\end{enumerate}
+
+\textit{Step-by-step:}
+\begin{itemize}
+  \item Use the same model: \(\dfrac{dy}{dt} = 0.045 y\)
+  \item So:
+  \[
+  \boxed{y(t) = 1200\,e^{0.045t}}
+  \]
+  \item After 8 years:
+  \[
+  y(8) \approx 1200\,e^{0.36} \approx \$1721
+  \]
+  \item To reach \$3000:
+  \[
+  3000 = 1200\,e^{0.045t} \Rightarrow t = \frac{\ln(2.5)}{0.045} \approx 18.3 \text{ years}
+  \]
+\end{itemize}
+\end{enumerate}
+
+\noindent
+\textbf{Big Picture Reminder:}  
+If something keeps growing or shrinking \emph{proportionally} to how much there is, you're looking at exponential behavior. Just find \(k\), plug it into the formula, and boom—you’ve got a time machine.
+
+
+
+
+
+\newpage
+
+\section{7.9 Logistic Models with Differential Equations}
+
+\subsection*{Big-Idea Definition}
+A \textbf{logistic model} is like population growth... but with common sense.
+
+Instead of growing forever like \( \frac{dy}{dt} = ky \) - essentially rabbit population but no fox -  logistic growth includes a cap. This upper limit is called the \textbf{carrying capacity}, and it reflects things like limited food, space, or how many times Mr. Moy will let a student say “Can we go over the curve one more time?” before he says “No.”
+
+The logistic differential equation looks like:
+\[
+\frac{dy}{dt} = ky\left(1 - \frac{y}{L}\right)
+\]
+
+Where:
+- \( y \) = population at time \( t \)
+- \( k \) = growth rate
+- \( L \) = carrying capacity (the max the environment can support)
+
+\subsection*{Explanation}
+When \( y \) is small, \( \left(1 - \frac{y}{L}\right) \approx 1 \), and the growth is nearly exponential.  
+But as \( y \) gets closer to \( L \), the factor \( \left(1 - \frac{y}{L}\right) \) gets smaller. The population growth slows down.  
+When \( y = L \), the growth stops completely:  
+\[
+\frac{dy}{dt} = 0
+\]
+
+This makes logistic models much more realistic than unlimited exponential growth—because no classroom has unlimited desks, no concert has unlimited tickets, and no AP class has unlimited sanity.
+
+\begin{figure}[h]
+\includegraphics[width=0.6\textwidth]{logistic_curve_example.png}
+\end{figure}
+
+\subsection*{Key Vocabulary}
+logistic growth, carrying capacity, equilibrium, saturation, inflection point, S-curve
+
+\subsection*{Worked Example}
+
+\textbf{Mr. Moy’s Croissant Factory }  
+Suppose Mr. Moy runs a croissant bakery. He starts with 100 croissants in circulation and expects the demand to grow quickly... but there’s a max of 1000 croissants the kitchen can support (supply chains, butter shortages, etc).
+
+He models it like this:
+\[
+\frac{dy}{dt} = 0.5y\left(1 - \frac{y}{1000}\right)
+\]
+
+\textbf{Step 1: What's the carrying capacity?}  
+\[
+L = 1000 \quad \text{(the kitchen's max croissant limit)}
+\]
+
+\textbf{Step 2: Where is growth fastest?}  
+When \( y = \frac{L}{2} = 500 \) croissants. That’s when production goes beast mode.
+
+\textbf{Step 3: Where is the slope zero?}  
+\[
+\frac{dy}{dt} = 0 \quad \text{when } y = 0 \text{ or } y = 1000
+\]
+Those are equilibrium points: zero croissants (sad) or full capacity (yay).
+
+\textbf{Step 4: Sketch the curve.}  
+Starts slow at 100, climbs fast around 500, flattens as it approaches 1000.
+
+\begin{center}
+\includegraphics[width=0.6\textwidth]{logistic_croissant_curve.png}
+\end{center}
+\captionof{figure}{Mr. Moy’s croissant empire in full logistic glory.}
+
+\subsection*{Conclusion}
+Logistic models are realistic because they know the world has limits.  
+They’re all about fast early growth, slowing down near the top, and leveling off like the end of the AP year.
+
+Just remember:  
+\[
+\frac{dy}{dt} = ky\left(1 - \frac{y}{L}\right)
+\]
+
+...and you’ll always be in the sweet spot between overgrowth and burnout. 
+\end{document}
